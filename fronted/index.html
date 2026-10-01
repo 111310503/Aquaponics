@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前後端測試</title>
+    <!-- 1. 在這裡引入 CSS 檔案 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>魚菜共生</h1>
+    <div class="data-container">
+        <p>溫溼度</p>
+        <p>水位</p>
+        <p>水質</p>
+    </div>
+    <p id="result">等待後端資料中...</p>
+
+    <!-- JavaScript 保持不變 -->
+    <script>
+        fetch('http://127.0.0.1:8080/api/data')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = data.message;
+            })
+            .catch(error => {
+                console.error('發生錯誤:', error);
+                document.getElementById('result').innerText = '連線失敗，請檢查後端是否啟動';
+            });
+    </script>
+</body>
+</html>
